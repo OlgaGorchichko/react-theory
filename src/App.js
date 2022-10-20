@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import React, { Component } from 'react';
+import Car from './Car/Car.js';
 
 class App extends Component {
   render() {
@@ -8,9 +9,11 @@ class App extends Component {
       <div className='App'>
         <header className="App-header">
          <img src={logo} className="App-logo" alt="logo" />
-         <h1 style={{color: 'white', fontSize: '20px'}}>
+         <p>
            Hello world!
-         </h1>
+         </p>
+         <Car name='Ford' year={2018} />
+         <Car name='Audi' year={2016} />
          <a
            className="App-link"
            href="https://reactjs.org"
