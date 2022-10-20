@@ -14,6 +14,9 @@ class App extends Component {
          </p>
          <Car name='Ford' year={2018} />
          <Car name='Audi' year={2016} />
+         <Car name='Mazda' year={2010}>
+          <p style={{color: 'red'}}>COLOR</p>
+         </Car>
          <a
            className="App-link"
            href="https://reactjs.org"
