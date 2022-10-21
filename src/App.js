@@ -11,41 +11,58 @@ class App extends Component {
       {name: 'Audi', year: 2016},
       {name: 'Mazda 3', year: 2010}
     ],
-    pageTitle: 'React components'
+    pageTitle: 'React components',
+    showCars: false
   }
 
-  changeTitleHandler = (newTitle) => {
+  onChangeName = (name, index) => {
+    const car = this.state.cars[index];
+    car.name = name;
+    const cars = [...this.state.cars];
+    cars[index] = car;
     this.setState({
-      pageTitle: newTitle
+      cars : cars
     })
   }
 
-  handleInput = (event) => {
+  toogleCarsHandler = () => {
     this.setState({
-      pageTitle: event.target.value
+      showCars: !this.state.showCars
     })
+  }
+
+  deleteHandler(index) {
+    const cars = this.state.cars.concat();
+    cars.splice(index, 1);
+
+    this.setState({cars: cars})
   }
 
   render() {
+    let cars = null;
+
+    if (this.state.showCars) {
+      cars = this.state.cars.map((car, index) => {
+        return (
+          <Car
+            key={index}
+            name={car.name} 
+            year={car.year}
+            onDelete={this.deleteHandler.bind(this, index)}
+            onChangeName={event => this.onChangeName(event.target.value, index)} />
+        )
+      })
+    }
+
     return (
       <div className='App'>
         <header className="App-header">
          <img src={logo} className="App-logo" alt="logo" />
           <h1>{this.state.pageTitle}</h1>
 
-          <input type="text" onChange={this.handleInput}/>
+          <button onClick={this.toogleCarsHandler}>Toogle cars</button>
           
-          <button onClick={this.changeTitleHandler.bind(this, 'Changed!')}>Change title</button>
-          
-          { this.state.cars.map((car, index) => {
-            return (
-              <Car
-                key={index}
-                name={car.name} 
-                year={car.year}
-                onChangeTitle={() => this.changeTitleHandler(car.name)} />
-            )
-          })}
+          { cars }
        </header>
       </div>
     );
