@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import classes from './Car.module.css';
 import withClass from "../hoc/withClass";
+import PropTypes from 'prop-types';
 
 class Car extends Component {
     render() {
-        console.log('classes green', classes.green);
         const inputClasses = [classes.input];
 
         if (this.props.name !== '') {
@@ -31,6 +31,13 @@ class Car extends Component {
             </React.Fragment>
         )
     }
+}
+
+Car.propTypes = {
+    name: PropTypes.string.isRequired,
+    year: PropTypes.number,
+    onChangeName: PropTypes.func,
+    onDelete: PropTypes.func
 }
 
 export default withClass(Car, classes.Car);
