@@ -10,8 +10,8 @@ class App extends Component {
   state = {
     cars: [
       {name: 'Ford', year: 2018},
-      // {name: 'Audi', year: 2016},
-      // {name: 'Mazda 3', year: 2010}
+      {name: 'Audi', year: 2016},
+      {name: 'Mazda 3', year: 2010}
     ],
     pageTitle: 'React components',
     showCars: false
@@ -33,14 +33,6 @@ class App extends Component {
     })
   }
 
-  componentWillMount() {
-    console.log('App component will moint');
-  }
-
-  componentDidMount() {
-    console.log('App component did moint');
-  }
-
   deleteHandler(index) {
     const cars = this.state.cars.concat();
     cars.splice(index, 1);
@@ -49,7 +41,6 @@ class App extends Component {
   }
 
   render() {
-    console.log('App Render');
     let cars = null;
 
     if (this.state.showCars) {
@@ -75,7 +66,7 @@ class App extends Component {
 
           <Counter/>
           <hr/>
-          
+
           <button
             style={{marginTop: 20}}
             className={'AppButton'}

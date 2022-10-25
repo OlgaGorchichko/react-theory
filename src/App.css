@@ -43,3 +43,10 @@
   font-weight: bold;
   text-transform: uppercase;
 }
+.AppButton:focus, .AppButton:active {
+    outline: none;
+  }
+
+.AppButton:hover {
+    background: #f0ff1e;
+  }
