@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import React, { Component } from 'react';
 import Car from './Car/Car.js';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
 
@@ -31,6 +32,14 @@ class App extends Component {
     })
   }
 
+  componentWillMount() {
+    console.log('App component will moint');
+  }
+
+  componentDidMount() {
+    console.log('App component did moint');
+  }
+
   deleteHandler(index) {
     const cars = this.state.cars.concat();
     cars.splice(index, 1);
@@ -39,17 +48,19 @@ class App extends Component {
   }
 
   render() {
+    console.log('App Render');
     let cars = null;
 
     if (this.state.showCars) {
       cars = this.state.cars.map((car, index) => {
         return (
-          <Car
-            key={index}
-            name={car.name} 
-            year={car.year}
-            onDelete={this.deleteHandler.bind(this, index)}
-            onChangeName={event => this.onChangeName(event.target.value, index)} />
+          <ErrorBoundary key={index}>
+            <Car
+              name={car.name} 
+              year={car.year}
+              onDelete={this.deleteHandler.bind(this, index)}
+              onChangeName={event => this.onChangeName(event.target.value, index)} />
+          </ErrorBoundary>
         )
       })
     }
@@ -58,7 +69,8 @@ class App extends Component {
       <div className='App'>
         <header className="App-header">
          <img src={logo} className="App-logo" alt="logo" />
-          <h1>{this.state.pageTitle}</h1>
+          {/* <h1>{this.state.pageTitle}</h1> */}
+          <h1>{this.props.title}</h1>
 
           <button onClick={this.toogleCarsHandler}>Toogle cars</button>
           <div style={{
